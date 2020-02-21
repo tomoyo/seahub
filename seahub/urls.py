@@ -161,6 +161,8 @@ from seahub.api2.endpoints.admin.logs import AdminLogsLoginLogs, AdminLogsFileAc
 from seahub.api2.endpoints.admin.terms_and_conditions import AdminTermsAndConditions, AdminTermAndCondition
 from seahub.api2.endpoints.admin.work_weixin import AdminWorkWeixinDepartments, \
     AdminWorkWeixinDepartmentMembers, AdminWorkWeixinUsersBatch, AdminWorkWeixinDepartmentsImport
+from seahub.api2.endpoints.admin.dingtalk import AdminDingtalkDepartments, \
+        AdminDingtalkDepartmentMembers, AdminDingtalkUsersBatch
 from seahub.api2.endpoints.admin.virus_scan_records import AdminVirusScanRecords, AdminVirusScanRecord
 from seahub.api2.endpoints.file_participants import FileParticipantsView, FileParticipantView
 from seahub.api2.endpoints.repo_related_users import RepoRelatedUsersView
@@ -171,6 +173,7 @@ urlpatterns = [
     url(r'^sso/$', sso, name='sso'),
     url(r'^shib-login/', shib_login, name="shib_login"),
     url(r'^oauth/', include('seahub.oauth.urls')),
+    url(r'^dingtalk/', include('seahub.dingtalk.urls')),
 
     url(r'^$', react_fake_view, name='libraries'),
     #url(r'^home/$', direct_to_template, { 'template': 'home.html' } ),
@@ -608,6 +611,11 @@ urlpatterns = [
     url(r'^api/v2.1/admin/work-weixin/users/batch/$', AdminWorkWeixinUsersBatch.as_view(), name='api-v2.1-admin-work-weixin-users'),
     url(r'^api/v2.1/admin/work-weixin/departments/import/$', AdminWorkWeixinDepartmentsImport.as_view(), name='api-v2.1-admin-work-weixin-department-import'),
 
+    ## admin:dingtalk departments
+    url(r'^api/v2.1/admin/dingtalk/departments/$', AdminDingtalkDepartments.as_view(), name='api-v2.1-admin-dingtalk-departments'),
+    url(r'^api/v2.1/admin/dingtalk/departments/(?P<department_id>\d+)/members/$', AdminDingtalkDepartmentMembers.as_view(), name='api-v2.1-admin-dingtalk-department-members'),
+    url(r'^api/v2.1/admin/dingtalk/users/batch/$', AdminDingtalkUsersBatch.as_view(), name='api-v2.1-admin-dingtalk-users-batch'),
+
     ### system admin ###
     url(r'^sys/settings/$', sys_settings, name='sys_settings'),
     url(r'^sys/statistic/file/$', sys_statistic_file, name='sys_statistic_file'),
@@ -722,6 +730,8 @@ urlpatterns = [
     url(r'^sys/upload-links/$', sysadmin_react_fake_view, name="sys_upload_links"),
     url(r'^sys/work-weixin/$', sysadmin_react_fake_view, name="sys_work_weixin"),
     url(r'^sys/work-weixin/departments/$', sysadmin_react_fake_view, name="sys_work_weixin_departments"),
+    url(r'^sys/dingtalk/$', sysadmin_react_fake_view, name="sys_dingtalk"),
+    url(r'^sys/dingtalk/departments/$', sysadmin_react_fake_view, name="sys_dingtalk_departments"),
     url(r'^sys/invitations/$', sysadmin_react_fake_view, name="sys_invitations"),
     url(r'^sys/abuse-reports/$', sysadmin_react_fake_view, name="sys_abuse_reports"),
 

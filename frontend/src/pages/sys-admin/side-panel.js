@@ -5,7 +5,7 @@ import Logo from '../../components/logo';
 import { gettext, siteRoot, isPro, otherPermission, canViewSystemInfo, canViewStatistic,
   canConfigSystem, canManageLibrary, canManageUser, canManageGroup, canViewUserLog,
   canViewAdminLog, constanceEnabled, multiTenancy, multiInstitution, sysadminExtraEnabled,
-  enableGuestInvitation, enableTermsAndConditions, enableFileScan, enableWorkWeixin,
+  enableGuestInvitation, enableTermsAndConditions, enableFileScan, enableWorkWeixin, enableDingtalkDepartment,
   enableShareLinkReportAbuse } from '../../utils/constants';
 
 const propTypes = {
@@ -259,6 +259,20 @@ class SidePanel extends React.Component {
                     </Link>
                   </li>
                 }
+
+                {otherPermission && enableDingtalkDepartment &&
+                  <li className="nav-item">
+                    <Link
+                      className={`nav-link ellipsis ${this.getActiveClass('dingtalk')}`}
+                      to={siteRoot + 'sys/dingtalk/'}
+                      onClick={() => this.props.tabItemClick('dingtalk')}
+                    >
+                      <span className="sf3-font-enterprise-wechat sf3-font" aria-hidden="true"></span>
+                      <span className="nav-text">{'钉钉集成'}</span>
+                    </Link>
+                  </li>
+                }
+
                 {otherPermission && enableShareLinkReportAbuse &&
                   <li className="nav-item">
                     <Link
